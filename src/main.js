@@ -117,7 +117,11 @@ function highlightCode(code) {
     'const', 'var', 'async', 'await', 'new', 'try', 'catch', 'if', 'else', 'for',
     'while', 'switch', 'case', 'break', 'when', 'in', 'data', 'val', 'interface',
     'type', 'echo', 'foreach', 'namespace', 'using', 'SELECT', 'FROM', 'WHERE',
-    'GROUP', 'BY', 'HAVING', 'ORDER', 'COUNT', 'AVG', 'INNER', 'JOIN', 'local'
+    'GROUP', 'BY', 'HAVING', 'ORDER', 'COUNT', 'AVG', 'INNER', 'JOIN', 'local',
+    'Algoritmo', 'FinAlgoritmo', 'Proceso', 'FinProceso', 'Definir', 'Como', 'Escribir',
+    'Leer', 'Si', 'Entonces', 'SiNo', 'FinSi', 'Para', 'Hasta', 'Con', 'Paso', 'Hacer',
+    'FinPara', 'Mientras', 'FinMientras', 'Repetir', 'Que', 'Dimension', 'MOD', 'Trunc',
+    'Subcadena', 'Longitud', 'Verdadero', 'Falso', 'NO', 'Y', 'O'
   ];
   const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
   safe = safe.replace(kwRegex, '<span class="tok-kw">$1</span>');
@@ -126,9 +130,15 @@ function highlightCode(code) {
   safe = safe.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="tok-num">$1</span>');
 
   // 5. Types
-  const types = ['int', 'float', 'string', 'bool', 'String', 'Boolean', 'Number', 'Double', 'Int'];
+  const types = [
+    'int', 'float', 'string', 'bool', 'String', 'Boolean', 'Number', 'Double', 'Int',
+    'Cadena', 'Entero', 'Real', 'Logico', 'Caracter'
+  ];
   const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
   safe = safe.replace(typeRegex, '<span class="tok-type">$1</span>');
+
+  // 6. Assignment arrow <-
+  safe = safe.replace(/&lt;-/g, '<span class="tok-op">&lt;-</span>');
 
   return safe;
 }

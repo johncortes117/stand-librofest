@@ -347,5 +347,130 @@ System.out.print(Math.abs(min) < 0);`,
     options: ['true', 'false', 'ArithmeticException', '0'],
     correct: 'true',
     explanation: '`Integer.MIN_VALUE` es -2147483648. Como el positivo máximo es 2147483647, el valor absoluto desborda (overflow) y vuelve a ser negativo (-2147483648 < 0 es `true`).'
+  },
+
+  // ===================== PSEINT =====================
+  {
+    id: 'hard-pseint-subcadena',
+    language: 'PSeInt',
+    title: 'Indexación de Subcadena en PSeInt',
+    code: `Algoritmo RetoSubcadena
+    Definir txt Como Cadena;
+    txt <- "DevClub";
+    Escribir Subcadena(txt, 1, 3);
+FinAlgoritmo`,
+    question: '¿Qué imprimirá PSeInt en la terminal de ejecución?',
+    options: ['Dev', 'evC', 'De', 'D'],
+    correct: 'Dev',
+    explanation: 'En PSeInt las cadenas se indexan desde 1 (no desde 0) y los límites son inclusivos: posiciones 1 a 3 toma "D", "e", "v" -> "Dev".'
+  },
+  {
+    id: 'hard-pseint-mod-trunc',
+    language: 'PSeInt',
+    title: 'Operador MOD y Trunc',
+    code: `Algoritmo CalculoMod
+    Definir a, b Como Entero;
+    a <- 19;
+    b <- 4;
+    Escribir (a MOD b) + Trunc(a / b);
+FinAlgoritmo`,
+    question: '¿Cuál es el valor mostrado en pantalla por Escribir?',
+    options: ['7', '3', '4', '8'],
+    correct: '7',
+    explanation: '`19 MOD 4` da el residuo 3. `Trunc(19 / 4)` trunca a 4. Por lo tanto 3 + 4 = 7.'
+  },
+  {
+    id: 'hard-pseint-dimension',
+    language: 'PSeInt',
+    title: 'Indexación de Arreglos (Dimension)',
+    code: `Algoritmo ArreglosPSeInt
+    Dimension v[3];
+    v[1] <- 10;
+    v[2] <- 20;
+    v[3] <- 30;
+    Escribir v[2] + v[3];
+FinAlgoritmo`,
+    question: '¿Qué resultado muestra PSeInt al ejecutar el algoritmo?',
+    options: ['50', '30', 'Error: Fuera de rango', '20'],
+    correct: '50',
+    explanation: '¡La regla de oro de PSeInt! Por defecto los arreglos se indexan desde 1. v[2] es 20 y v[3] es 30; 20 + 30 = 50.'
+  },
+  {
+    id: 'hard-pseint-bucle-paso',
+    language: 'PSeInt',
+    title: 'Bucle Para con Paso 2',
+    code: `Algoritmo BucleConPaso
+    Definir suma, i Como Entero;
+    suma <- 0;
+    Para i <- 1 Hasta 5 Con Paso 2 Hacer
+        suma <- suma + i;
+    FinPara
+    Escribir suma;
+FinAlgoritmo`,
+    question: '¿Cuál es el valor final acumulado en la variable suma?',
+    options: ['9', '15', '6', '12'],
+    correct: '9',
+    explanation: '`i` recorre los valores 1, 3, 5 con salto de 2 en 2. La suma es 1 + 3 + 5 = 9.'
+  },
+  {
+    id: 'hard-pseint-logica-y-o',
+    language: 'PSeInt',
+    title: 'Operadores lógicos Y, O, NO',
+    code: `Algoritmo EvaluacionLogica
+    Definir resultado Como Logico;
+    resultado <- (10 > 5) Y NO (4 = 4);
+    Escribir resultado;
+FinAlgoritmo`,
+    question: '¿Qué valor booleano muestra la consola de PSeInt?',
+    options: ['FALSO', 'VERDADERO', '0', 'Error'],
+    correct: 'FALSO',
+    explanation: '`(10 > 5)` es Verdadero. `(4 = 4)` es Verdadero, por lo que `NO (4 = 4)` es Falso. `Verdadero Y Falso` resulta en FALSO.'
+  },
+  {
+    id: 'hard-pseint-escribir-comas',
+    language: 'PSeInt',
+    title: 'Concatenación en Escribir con comas',
+    code: `Algoritmo SalidaComas
+    Definir n Como Entero;
+    Definir t Como Cadena;
+    n <- 10;
+    t <- "20";
+    Escribir n, t;
+FinAlgoritmo`,
+    question: '¿Cómo formatea PSeInt la salida de variables separadas por comas?',
+    options: ['1020', '10 20', '30', '"1020"'],
+    correct: '1020',
+    explanation: 'En PSeInt separar variables con comas en `Escribir` las concatena inmediatamente una tras otra sin espacios extra: `1020`.'
+  },
+  {
+    id: 'hard-pseint-mientras',
+    language: 'PSeInt',
+    title: 'Bucle Mientras que duplica el valor',
+    code: `Algoritmo ContadorMientras
+    Definir c Como Entero;
+    c <- 1;
+    Mientras c < 4 Hacer
+        c <- c * 2;
+    FinMientras
+    Escribir c;
+FinAlgoritmo`,
+    question: '¿Cuál es el valor impreso al terminar el bucle Mientras?',
+    options: ['4', '2', '3', '8'],
+    correct: '4',
+    explanation: 'En la 1ra iteración `c` pasa a 2 (2 < 4). En la 2da iteración `c` pasa a 4. Como 4 < 4 es falso, el bucle se detiene e imprime 4.'
+  },
+  {
+    id: 'hard-pseint-longitud',
+    language: 'PSeInt',
+    title: 'Función Longitud con espacios',
+    code: `Algoritmo MedirTexto
+    Definir palabra Como Cadena;
+    palabra <- "UPEC 2026";
+    Escribir Longitud(palabra);
+FinAlgoritmo`,
+    question: '¿Qué valor entero devuelve la función Longitud?',
+    options: ['9', '8', '4', 'Error'],
+    correct: '9',
+    explanation: '`Longitud()` cuenta todos los caracteres incluyendo el espacio en blanco: 4 letras + 1 espacio + 4 números = 9.'
   }
 ];
