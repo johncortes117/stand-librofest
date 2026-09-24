@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IEEE & DevClub UPEC • Trivia Stand | Libro Fest</title>
+    <meta name="description" content="Trivia interactiva para el stand de IEEE y DevClub en UPEC Libro Fest 2026. Adivina logos, sintaxis de código y retos de consola." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/logos/python.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app" class="app-root">
+      <!-- Clean Stand Header -->
+      <header class="stand-header">
+        <div class="brand-group">
+          <div class="brand-pill ieee-pill">
+            <span class="brand-name">IEEE RAMA UPEC</span>
+          </div>
+          <div class="brand-pill devclub-pill">
+            <span class="brand-name">&lt;DevClub UPEC/&gt;</span>
+          </div>
+          <div class="event-tag">LIBRO FEST 2026</div>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-sound-toggle" class="header-btn" title="Activar/Silenciar (M)">
+            <span id="sound-icon">🔊</span>
+            <span>Sonido</span>
+          </button>
+          <button id="btn-show-records" class="header-btn" title="Ver Salón de la Fama">
+            <span>🏆</span>
+            <span>Récords</span>
+          </button>
+          <button id="btn-fullscreen-toggle" class="header-btn" title="Pantalla Completa (F)">
+            <span>⛶</span>
+            <span>Pantalla</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Viewport Container (Strictly 100% height, zero vertical scroll) -->
+      <main class="stand-stage">
+        <!-- SCREEN 1: Home / Level & Mode Selection -->
+        <section id="screen-home" class="screen-view active">
+          <div class="home-top">
+            <h1 class="home-title">
+              DESAFÍO TECH: <span class="highlight-text">¿CUÁNTO SABES DE PROGRAMACIÓN?</span>
+            </h1>
+            <p class="home-subtitle">
+              Demuestra tu conocimiento en el stand, acumula puntos y gana premios oficiales de IEEE &amp; DevClub.
+            </p>
+
+            <!-- Mode Selector Pills -->
+            <div class="mode-bar">
+              <span class="mode-bar-label">MODALIDAD:</span>
+              <div class="mode-pills" id="mode-selector">
+                <button class="mode-pill active" data-mode="blitz45">⏱️ Blitz 45s</button>
+                <button class="mode-pill" data-mode="blitz30">⚡ Rápido 30s</button>
+                <button class="mode-pill" data-mode="questions10">🎯 10 Preguntas (3 vidas)</button>
+                <button class="mode-pill" data-mode="zen">♾️ Modo Libre</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Level Cards in 1 Row -->
+          <div class="levels-row">
+            <!-- Level 1: Fácil -->
+            <div class="level-box box-easy" id="card-start-easy">
+              <div class="level-topline">
+                <span class="level-num num-easy">NIVEL 1</span>
+                <span class="level-points">+100 pts</span>
+              </div>
+              <div class="level-icon-wrap icon-easy">
+                <img src="/logos/python.svg" alt="Logo" class="level-preview-icon" />
+              </div>
+              <h2 class="level-name">FÁCIL: LOGO HUNTER</h2>
+              <p class="level-info">Adivina el lenguaje o herramienta tech mirando únicamente su <strong>logo oficial</strong>.</p>
+              <button class="btn-play-level btn-easy">¡JUGAR FÁCIL! ➔</button>
+            </div>
+
+            <!-- Level 2: Medio -->
+            <div class="level-box box-medium" id="card-start-medium">
+              <div class="level-topline">
+                <span class="level-num num-medium">NIVEL 2</span>
+                <span class="level-points">+200 pts</span>
+              </div>
+              <div class="level-icon-wrap icon-medium">
+                <span class="level-emoji">🔍</span>
+              </div>
+              <h2 class="level-name">MEDIO: CODE DETECTIVE</h2>
+              <p class="level-info">Mira un fragmento de código fuente real y deduce <strong>en qué lenguaje</strong> está escrito.</p>
+              <button class="btn-play-level btn-medium">¡JUGAR MEDIO! ➔</button>
+            </div>
+
+            <!-- Level 3: Difícil -->
+            <div class="level-box box-hard" id="card-start-hard">
+              <div class="level-topline">
+                <span class="level-num num-hard">NIVEL 3</span>
+                <span class="level-points">+350 pts</span>
+              </div>
+              <div class="level-icon-wrap icon-hard">
+                <span class="level-emoji">🧠</span>
+              </div>
+              <h2 class="level-name">DIFÍCIL: CONSOLE MASTER</h2>
+              <p class="level-info">¿Qué imprime la consola? Analiza trampas de lógica, coerción y quirks de ejecución.</p>
+              <button class="btn-play-level btn-hard">¡JUGAR DIFÍCIL! ➔</button>
+            </div>
+          </div>
+
+          <!-- Bottom Shortcut Bar -->
+          <div class="home-bottom-bar">
+            <span>⌨️ Atajos: Teclas <strong>1</strong>, <strong>2</strong>, <strong>3</strong>, <strong>4</strong> para responder</span>
+            <span>•</span>
+            <span>🔥 Racha: Respuestas consecutivas multiplican tu puntaje</span>
+            <span>•</span>
+            <span>🎁 Participa y reclama stickers en el stand</span>
+          </div>
+        </section>
+
+        <!-- SCREEN 2: Gameplay Arena -->
+        <section id="screen-game" class="screen-view">
+          <!-- Game HUD Bar -->
+          <div class="game-hud-bar">
+            <div class="hud-left">
+              <button id="btn-abort-game" class="hud-btn-exit" title="Salir al menú">✕ Salir</button>
+              <div class="hud-level-tag" id="hud-level-tag">FÁCIL: LOGOS</div>
+              <div class="hud-mode-pill" id="hud-mode-tag">⏱️ 45s</div>
+            </div>
+
+            <div class="hud-center">
+              <div class="timer-display" id="hud-timer-box">
+                <span class="timer-digits" id="hud-timer-val">45</span><span class="timer-s">s</span>
+              </div>
+              <div class="lives-display" id="hud-lives-box" style="display: none;">
+                <span class="heart-icon">❤️</span>
+                <span class="heart-icon">❤️</span>
+                <span class="heart-icon">❤️</span>
+              </div>
+            </div>
+
+            <div class="hud-right">
+              <div class="streak-pill" id="hud-streak-box">
+                <span>🔥</span>
+                <span id="hud-streak-val">x0</span>
+              </div>
+              <div class="score-pill">
+                <span class="score-label">PUNTOS</span>
+                <span class="score-val" id="hud-score-val">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Line -->
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="hud-progress-fill" style="width: 100%;"></div>
+          </div>
+
+          <!-- Challenge Stage -->
+          <div class="game-stage-card">
+            <!-- Question Prompt Header -->
+            <div class="stage-q-header">
+              <div class="q-tag" id="q-counter">PREGUNTA #1</div>
+              <h2 class="q-title" id="q-prompt">¿Qué lenguaje o herramienta representa este logo?</h2>
+              <div class="q-category-tag" id="q-category">Tecnología</div>
+            </div>
+
+            <!-- Media Stage: Logo or Code Mockup (Strict max-height so it fits) -->
+            <div class="stage-media-area" id="question-display">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Compact Feedback Strip (Zero vertical layout shift) -->
+            <div class="feedback-strip" id="feedback-banner" style="display: none;">
+              <span class="feedback-icon" id="fb-icon">✓</span>
+              <span class="feedback-status" id="fb-status">¡Correcto! +100 pts</span>
+              <span class="feedback-text" id="fb-text">Curiosidad o explicación aquí.</span>
+            </div>
+
+            <!-- Options 2x2 Grid -->
+            <div class="options-grid" id="options-grid">
+              <!-- 4 buttons dynamically inserted -->
+            </div>
+
+            <!-- Manual Advance Button (Zen mode) -->
+            <div class="advance-wrap" id="advance-container" style="display: none;">
+              <button id="btn-next-question" class="btn-next-q">Siguiente Pregunta [Espacio] ➔</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 3: Game Over & Podio -->
+        <section id="screen-gameover" class="screen-view">
+          <div class="gameover-container">
+            <div class="go-header">
+              <div class="go-badge" id="go-level-badge">NIVEL COMPLETADO</div>
+              <h1 class="go-title" id="go-title">¡PARTIDA FINALIZADA!</h1>
+            </div>
+
+            <!-- 4 Stats in 1 Row -->
+            <div class="go-stats-row">
+              <div class="go-stat-card primary">
+                <span class="go-stat-label">PUNTAJE FINAL</span>
+                <span class="go-stat-num" id="go-final-score">1450</span>
+              </div>
+              <div class="go-stat-card">
+                <span class="go-stat-label">ACIERTOS</span>
+                <span class="go-stat-num" id="go-correct-count">12</span>
+                <span class="go-stat-sub" id="go-total-count">de 14 preguntas</span>
+              </div>
+              <div class="go-stat-card">
+                <span class="go-stat-label">PRECISIÓN</span>
+                <span class="go-stat-num" id="go-accuracy">86%</span>
+              </div>
+              <div class="go-stat-card">
+                <span class="go-stat-label">MEJOR RACHA</span>
+                <span class="go-stat-num" id="go-max-streak">🔥 6</span>
+              </div>
+            </div>
+
+            <!-- Direct Name Entry -->
+            <div class="go-save-box" id="save-score-section">
+              <h3 class="save-heading">REGISTRA TU NOMBRE EN EL TOP 10</h3>
+              <form class="save-row-form" id="form-save-score">
+                <input 
+                  type="text" 
+                  id="input-player-name" 
+                  class="save-input" 
+                  placeholder="Tu Nombre o Apodo (Ej: Carlos - Sistemas)" 
+                  maxlength="30" 
+                  required 
+                  autocomplete="off"
+                />
+                <button type="submit" class="btn-save-record" id="btn-save-score">Guardar Récord 💾</button>
+              </form>
+            </div>
+
+            <div class="go-saved-alert" id="saved-confirmation" style="display: none;">
+              ✓ ¡Récord guardado con éxito en el Salón de la Fama!
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="go-buttons-row">
+              <button id="btn-play-again" class="btn-go-action btn-go-primary">🔄 Jugar Otra Vez</button>
+              <button id="btn-go-leaderboard" class="btn-go-action btn-go-secondary">🏆 Salón de la Fama</button>
+              <button id="btn-go-home" class="btn-go-action btn-go-outline">🏠 Cambiar Nivel</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- LEADERBOARD MODAL -->
+      <div class="modal-backdrop" id="modal-leaderboard" style="display: none;">
+        <div class="modal-box">
+          <div class="modal-top">
+            <div class="modal-title">🏆 SALÓN DE LA FAMA • STAND IEEE &amp; DEVCLUB</div>
+            <button class="modal-close-btn" id="btn-close-modal">✕</button>
+          </div>
+
+          <div class="modal-filters" id="board-tabs">
+            <button class="filter-tab active" data-filter="all">Todos</button>
+            <button class="filter-tab" data-filter="easy">Fácil (Logos)</button>
+            <button class="filter-tab" data-filter="medium">Medio (Código)</button>
+            <button class="filter-tab" data-filter="hard">Difícil (Consola)</button>
+          </div>
+
+          <div class="modal-list-body" id="board-table-container">
+            <!-- Dynamic rows -->
+          </div>
+
+          <div class="modal-bottom">
+            <button class="btn-clear-scores" id="btn-clear-board">Borrar Récords</button>
+            <button class="btn-close-modal-bottom" id="btn-close-board-bottom">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
