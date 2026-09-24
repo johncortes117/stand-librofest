@@ -191,7 +191,13 @@ function startGame(level) {
   showScreen('game');
   renderNextQuestion();
 
-  if (state.gameMode === 'blitz45' || state.gameMode === 'blitz30') {
+  // For Level 3: Untimed analysis mode (no countdown clock)
+  if (state.currentLevel === 'hard') {
+    clearInterval(state.timerInterval);
+    hudTimerBox.style.display = 'none';
+    hudLivesBox.style.display = 'none';
+    hudProgressFill.style.width = '0%';
+  } else if (state.gameMode === 'blitz45' || state.gameMode === 'blitz30') {
     startTimer();
   }
 }
@@ -212,7 +218,11 @@ function setupModeHUD() {
   hudScoreVal.textContent = '0';
   hudTimerBox.classList.remove('urgent');
 
-  if (state.gameMode === 'blitz45') {
+  if (state.currentLevel === 'hard') {
+    hudTimerBox.style.display = 'none';
+    hudLivesBox.style.display = 'none';
+    hudModeTag.textContent = '♾️ Sin Tiempo (Análisis)';
+  } else if (state.gameMode === 'blitz45') {
     state.timerDuration = 45;
     state.timeRemaining = 45;
     hudTimerBox.style.display = 'inline-flex';
@@ -289,6 +299,12 @@ function renderNextQuestion() {
     return;
   }
 
+  // If in level 3 (untimed) and all questions in language deck are finished
+  if (state.currentLevel === 'hard' && state.questionIndex >= state.questionDeck.length) {
+    endGame('¡Reto de consola completado con éxito!');
+    return;
+  }
+
   if (state.questionIndex >= state.questionDeck.length) {
     // Reshuffle deck if blitz has remaining time
     if (state.currentLevel === 'easy') {
@@ -310,7 +326,13 @@ function renderNextQuestion() {
   state.questionIndex++;
 
   // Update question header
-  qCounter.textContent = `PREGUNTA #${state.questionIndex}`;
+  if (state.currentLevel === 'hard') {
+    qCounter.textContent = `RETO #${state.questionIndex} DE ${state.questionDeck.length}`;
+    const percent = Math.min(100, Math.round(((state.questionIndex) / state.questionDeck.length) * 100));
+    hudProgressFill.style.width = `${percent}%`;
+  } else {
+    qCounter.textContent = `PREGUNTA #${state.questionIndex}`;
+  }
 
   if (state.currentLevel === 'easy') {
     renderEasyQuestion(item);
@@ -488,8 +510,8 @@ function handleOptionSelected(selectedAnswer, correctAnswer, selectedBtn) {
     showFeedback(false, 'Respuesta Incorrecta', getFeedbackText());
   }
 
-  // Auto advance or show manual button in Zen mode
-  if (state.gameMode === 'zen') {
+  // Auto advance or show manual button in Zen mode or Level 3 (Hard)
+  if (state.gameMode === 'zen' || state.currentLevel === 'hard') {
     advanceContainer.style.display = 'flex';
   } else {
     // Stand blitz: 1.2s delay for instant high adrenaline rhythm
