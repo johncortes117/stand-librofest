@@ -16,13 +16,11 @@
       <!-- Clean Stand Header -->
       <header class="stand-header">
         <div class="brand-group">
-          <div class="brand-pill ieee-pill">
-            <span class="brand-name">IEEE RAMA UPEC</span>
-          </div>
-          <div class="brand-pill devclub-pill">
-            <span class="brand-name">&lt;DevClub UPEC/&gt;</span>
-          </div>
-          <div class="event-tag">LIBRO FEST 2026</div>
+          <div class="brand-pill ieee-pill">IEEE UPEC</div>
+          <span class="brand-sep">×</span>
+          <div class="brand-pill devclub-pill">&lt;DevClub/&gt;</div>
+          <span class="brand-sep">•</span>
+          <span class="event-tag">LIBRO FEST 2026</span>
         </div>
 
         <div class="header-actions">
@@ -43,80 +41,74 @@
 
       <!-- Main Viewport Container (Strictly 100% height, zero vertical scroll) -->
       <main class="stand-stage">
-        <!-- SCREEN 1: Home / Level & Mode Selection -->
+        <!-- SCREEN 1: Home / Direct Level Selection -->
         <section id="screen-home" class="screen-view active">
-          <div class="home-top">
-            <h1 class="home-title">
-              DESAFÍO TECH: <span class="highlight-text">¿CUÁNTO SABES DE PROGRAMACIÓN?</span>
-            </h1>
-            <p class="home-subtitle">
-              Demuestra tu conocimiento en el stand, acumula puntos y gana premios oficiales de IEEE &amp; DevClub.
-            </p>
-
-            <!-- Mode Selector Pills -->
-            <div class="mode-bar">
-              <span class="mode-bar-label">MODALIDAD:</span>
-              <div class="mode-pills" id="mode-selector">
-                <button class="mode-pill active" data-mode="blitz45">⏱️ Blitz 45s</button>
-                <button class="mode-pill" data-mode="blitz30">⚡ Rápido 30s</button>
-                <button class="mode-pill" data-mode="questions10">🎯 10 Preguntas (3 vidas)</button>
-                <button class="mode-pill" data-mode="zen">♾️ Modo Libre</button>
-              </div>
-            </div>
+          <div class="home-headline">
+            <h1 class="main-title">ELIGE TU RETO</h1>
+            <p class="main-subtitle">Adivina la mayor cantidad posible antes de que termine el tiempo</p>
           </div>
 
-          <!-- 3 Level Cards in 1 Row -->
-          <div class="levels-row">
+          <!-- 3 GIANT LEVEL CARDS -->
+          <div class="giant-levels-grid">
             <!-- Level 1: Fácil -->
-            <div class="level-box box-easy" id="card-start-easy">
-              <div class="level-topline">
-                <span class="level-num num-easy">NIVEL 1</span>
-                <span class="level-points">+100 pts</span>
+            <div class="giant-card card-easy-glow" id="card-start-easy">
+              <div class="card-badge badge-green">FÁCIL</div>
+              <div class="card-visual-preview preview-logos">
+                <div class="logo-stack">
+                  <img src="/logos/python.svg" alt="Python" class="stack-img img-1" />
+                  <img src="/logos/javascript.svg" alt="JavaScript" class="stack-img img-2" />
+                  <img src="/logos/cpp.svg" alt="C++" class="stack-img img-3" />
+                </div>
               </div>
-              <div class="level-icon-wrap icon-easy">
-                <img src="/logos/python.svg" alt="Logo" class="level-preview-icon" />
-              </div>
-              <h2 class="level-name">FÁCIL: LOGO HUNTER</h2>
-              <p class="level-info">Adivina el lenguaje o herramienta tech mirando únicamente su <strong>logo oficial</strong>.</p>
-              <button class="btn-play-level btn-easy">¡JUGAR FÁCIL! ➔</button>
+              <h2 class="card-title">ADIVINA EL LOGO</h2>
+              <p class="card-caption">Reconoce el lenguaje o herramienta por su icono oficial</p>
+              <button class="card-cta-btn btn-green">JUGAR FÁCIL ➔</button>
             </div>
 
             <!-- Level 2: Medio -->
-            <div class="level-box box-medium" id="card-start-medium">
-              <div class="level-topline">
-                <span class="level-num num-medium">NIVEL 2</span>
-                <span class="level-points">+200 pts</span>
+            <div class="giant-card card-medium-glow" id="card-start-medium">
+              <div class="card-badge badge-amber">MEDIO</div>
+              <div class="card-visual-preview preview-code">
+                <div class="mini-terminal">
+                  <div class="mini-topbar">
+                    <span class="mini-dot r"></span>
+                    <span class="mini-dot y"></span>
+                    <span class="mini-dot g"></span>
+                    <span class="mini-title">codigo.src</span>
+                  </div>
+                  <pre class="mini-code"><code><span class="tok-kw">fn</span> <span class="tok-fn">main</span>() {
+  <span class="tok-fn">println!</span>(<span class="tok-str">"Hola UPEC"</span>);
+}</code></pre>
+                </div>
               </div>
-              <div class="level-icon-wrap icon-medium">
-                <span class="level-emoji">🔍</span>
-              </div>
-              <h2 class="level-name">MEDIO: CODE DETECTIVE</h2>
-              <p class="level-info">Mira un fragmento de código fuente real y deduce <strong>en qué lenguaje</strong> está escrito.</p>
-              <button class="btn-play-level btn-medium">¡JUGAR MEDIO! ➔</button>
+              <h2 class="card-title">ADIVINA EL CÓDIGO</h2>
+              <p class="card-caption">Descubre en qué lenguaje está escrito el código fuente</p>
+              <button class="card-cta-btn btn-amber">JUGAR MEDIO ➔</button>
             </div>
 
             <!-- Level 3: Difícil -->
-            <div class="level-box box-hard" id="card-start-hard">
-              <div class="level-topline">
-                <span class="level-num num-hard">NIVEL 3</span>
-                <span class="level-points">+350 pts</span>
+            <div class="giant-card card-hard-glow" id="card-start-hard">
+              <div class="card-badge badge-rose">DIFÍCIL</div>
+              <div class="card-visual-preview preview-console">
+                <div class="mini-terminal console-theme">
+                  <div class="mini-topbar">
+                    <span class="mini-dot r"></span>
+                    <span class="mini-dot y"></span>
+                    <span class="mini-dot g"></span>
+                    <span class="mini-title">consola.log</span>
+                  </div>
+                  <pre class="mini-code"><code>console.<span class="tok-fn">log</span>(<span class="tok-num">1</span> + <span class="tok-str">"2"</span> + <span class="tok-num">3</span>);
+<span class="tok-com">// &gt; ¿ "123" ó 6 ?</span></code></pre>
+                </div>
               </div>
-              <div class="level-icon-wrap icon-hard">
-                <span class="level-emoji">🧠</span>
-              </div>
-              <h2 class="level-name">DIFÍCIL: CONSOLE MASTER</h2>
-              <p class="level-info">¿Qué imprime la consola? Analiza trampas de lógica, coerción y quirks de ejecución.</p>
-              <button class="btn-play-level btn-hard">¡JUGAR DIFÍCIL! ➔</button>
+              <h2 class="card-title">¿QUÉ IMPRIME?</h2>
+              <p class="card-caption">Analiza trampas de lógica, tipos y salida de consola</p>
+              <button class="card-cta-btn btn-rose">JUGAR DIFÍCIL ➔</button>
             </div>
           </div>
 
-          <!-- Bottom Shortcut Bar -->
-          <div class="home-bottom-bar">
-            <span>⌨️ Atajos: Teclas <strong>1</strong>, <strong>2</strong>, <strong>3</strong>, <strong>4</strong> para responder</span>
-            <span>•</span>
-            <span>🔥 Racha: Respuestas consecutivas multiplican tu puntaje</span>
-            <span>•</span>
-            <span>🎁 Participa y reclama stickers en el stand</span>
+          <div class="home-minimal-footer">
+            <span>💡 Responde tocando la pantalla o usando las teclas <strong>1</strong>, <strong>2</strong>, <strong>3</strong>, <strong>4</strong></span>
           </div>
         </section>
 

@@ -112,6 +112,12 @@ html, body {
   letter-spacing: 0.5px;
 }
 
+.brand-sep {
+  color: var(--text-dim);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -169,205 +175,198 @@ html, body {
 }
 
 /* ==========================================================================
-   SCREEN 1: Home / Level Picker
+   SCREEN 1: Home / Direct Level Selection (Minimalist & Impactful)
    ========================================================================== */
 
-.home-top {
+.home-headline {
   text-align: center;
   flex-shrink: 0;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
-.home-title {
-  font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+.main-title {
+  font-size: clamp(2rem, 3.4vw, 3rem);
   font-weight: 900;
   letter-spacing: -0.5px;
-  line-height: 1.15;
-  margin-bottom: 0.3rem;
-}
-
-.highlight-text {
-  color: var(--dev-cyan);
-}
-
-.home-subtitle {
-  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
-  color: var(--text-muted);
-  margin-bottom: 0.8rem;
-}
-
-.mode-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  padding: 0.4rem 0.8rem;
-  border-radius: 12px;
-}
-
-.mode-bar-label {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-}
-
-.mode-pills {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.mode-pill {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-muted);
-  padding: 0.4rem 0.9rem;
-  border-radius: 8px;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.mode-pill:hover {
-  background: rgba(255, 255, 255, 0.06);
+  line-height: 1.1;
   color: #ffffff;
 }
 
-.mode-pill.active {
-  background: var(--ieee-blue);
-  color: #ffffff;
-  border-color: var(--dev-cyan);
+.main-subtitle {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: var(--text-muted);
+  margin-top: 0.2rem;
 }
 
-/* 3 Level Cards in 1 Row */
-.levels-row {
+/* 3 Giant Cards Grid */
+.giant-levels-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+  gap: 1.5rem;
   flex: 1;
   min-height: 0;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
-.level-box {
+.giant-card {
   background: var(--bg-surface);
   border: 2px solid var(--border-subtle);
-  border-radius: 18px;
-  padding: 1.4rem 1.6rem;
+  border-radius: 22px;
+  padding: 1.5rem 1.6rem 1.6rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.level-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+.giant-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
-.box-easy:hover { border-color: var(--color-green); }
-.box-medium:hover { border-color: var(--color-amber); }
-.box-hard:hover { border-color: var(--color-rose); }
+.card-easy-glow:hover { border-color: var(--color-green); box-shadow: 0 16px 36px rgba(16, 185, 129, 0.25); }
+.card-medium-glow:hover { border-color: var(--color-amber); box-shadow: 0 16px 36px rgba(245, 158, 11, 0.25); }
+.card-hard-glow:hover { border-color: var(--color-rose); box-shadow: 0 16px 36px rgba(244, 63, 94, 0.25); }
 
-.level-topline {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.level-num {
-  font-size: 0.8rem;
+.card-badge {
+  font-size: 0.95rem;
   font-weight: 900;
-  padding: 0.25rem 0.65rem;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
+  padding: 0.3rem 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
 }
 
-.num-easy { background: rgba(16, 185, 129, 0.15); color: var(--color-green); border: 1px solid var(--color-green); }
-.num-medium { background: rgba(245, 158, 11, 0.15); color: var(--color-amber); border: 1px solid var(--color-amber); }
-.num-hard { background: rgba(244, 63, 94, 0.15); color: var(--color-rose); border: 1px solid var(--color-rose); }
+.badge-green { background: rgba(16, 185, 129, 0.18); color: var(--color-green); border: 1px solid var(--color-green); }
+.badge-amber { background: rgba(245, 158, 11, 0.18); color: var(--color-amber); border: 1px solid var(--color-amber); }
+.badge-rose { background: rgba(244, 63, 94, 0.18); color: var(--color-rose); border: 1px solid var(--color-rose); }
 
-.level-points {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--text-dim);
-}
-
-.level-icon-wrap {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
+/* Visual Previews Inside Cards (Explains the game in 0.5s) */
+.card-visual-preview {
+  width: 100%;
+  flex: 1;
+  min-height: 110px;
+  max-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.4rem 0;
-  background: rgba(255, 255, 255, 0.05);
+  margin: 0.5rem 0;
 }
 
-.level-preview-icon {
-  width: 44px;
-  height: 44px;
+/* 1. Logos Stack */
+.logo-stack {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0.8rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  width: 90%;
+  max-width: 260px;
+}
+
+.stack-img {
+  width: 52px;
+  height: 52px;
   object-fit: contain;
+  transition: transform 0.2s ease;
 }
 
-.level-emoji {
-  font-size: 2.2rem;
+.giant-card:hover .stack-img {
+  transform: scale(1.1);
 }
 
-.level-name {
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  margin-bottom: 0.3rem;
-}
-
-.level-info {
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-  color: var(--text-muted);
-  line-height: 1.4;
-  margin-bottom: 0.8rem;
-}
-
-.btn-play-level {
+/* 2 & 3. Mini Terminal */
+.mini-terminal {
   width: 100%;
-  padding: 0.85rem 1.2rem;
+  max-width: 290px;
+  background: #090e1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mini-topbar {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.6rem;
+  background: #111a2e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mini-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mini-dot.r { background: #ef4444; }
+.mini-dot.y { background: #f59e0b; }
+.mini-dot.g { background: #10b981; }
+
+.mini-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-left: 0.4rem;
+}
+
+.mini-code {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #e2e8f0;
+  padding: 0.65rem 0.9rem;
+}
+
+.card-title {
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  margin: 0.2rem 0;
+}
+
+.card-caption {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-bottom: 0.8rem;
+  max-width: 320px;
+}
+
+.card-cta-btn {
+  width: 100%;
+  padding: 0.95rem 1.4rem;
+  border-radius: 14px;
   font-family: var(--font-sans);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
   border: none;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.btn-easy { background: var(--color-green); color: #042918; }
-.btn-easy:hover { background: #34d399; }
+.btn-green { background: var(--color-green); color: #042918; }
+.btn-green:hover { background: #34d399; }
 
-.btn-medium { background: var(--color-amber); color: #261600; }
-.btn-medium:hover { background: #fbbf24; }
+.btn-amber { background: var(--color-amber); color: #261600; }
+.btn-amber:hover { background: #fbbf24; }
 
-.btn-hard { background: var(--color-rose); color: #ffffff; }
-.btn-hard:hover { background: #fb7185; }
+.btn-rose { background: var(--color-rose); color: #ffffff; }
+.btn-rose:hover { background: #fb7185; }
 
-.home-bottom-bar {
+.home-minimal-footer {
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-  padding: 0.6rem 1.2rem;
-  background: var(--bg-surface);
-  border-radius: 10px;
-  border: 1px solid var(--border-subtle);
+  text-align: center;
   font-size: 0.95rem;
-  color: var(--text-muted);
+  color: var(--text-dim);
+  padding: 0.2rem 0;
 }
 
 /* ==========================================================================

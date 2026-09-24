@@ -138,6 +138,14 @@ function showScreen(screenName) {
   }
 }
 
+function getProgressiveEasyDeck() {
+  const tier1 = shuffle(easyLogos.filter(item => item.difficulty === 1));
+  const tier2 = shuffle(easyLogos.filter(item => item.difficulty === 2));
+  const tier3 = shuffle(easyLogos.filter(item => item.difficulty === 3));
+  const tier4 = shuffle(easyLogos.filter(item => item.difficulty === 4));
+  return [...tier1, ...tier2, ...tier3, ...tier4];
+}
+
 // --- Game Logic ---
 function startGame(level) {
   sound.playSelect();
@@ -153,7 +161,7 @@ function startGame(level) {
 
   // Determine Deck
   if (level === 'easy') {
-    state.questionDeck = shuffle(easyLogos);
+    state.questionDeck = getProgressiveEasyDeck();
   } else if (level === 'medium') {
     state.questionDeck = shuffle(mediumSnippets);
   } else {
@@ -264,7 +272,7 @@ function renderNextQuestion() {
 
   if (state.questionIndex >= state.questionDeck.length) {
     // Reshuffle deck if blitz has remaining time
-    state.questionDeck = shuffle(state.questionDeck);
+    state.questionDeck = state.currentLevel === 'easy' ? getProgressiveEasyDeck() : shuffle(state.questionDeck);
     state.questionIndex = 0;
   }
 
