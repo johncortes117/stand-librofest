@@ -9,6 +9,7 @@ import { savePlayerScore, getTopScores, clearLeaderboard } from './leaderboard.j
 // --- State Machine ---
 const state = {
   currentLevel: 'easy',       // 'easy' | 'medium' | 'hard'
+  selectedHardLanguage: 'ALL', // 'Python' | 'JavaScript' | 'C / C++' | 'Java' | 'ALL'
   gameMode: 'blitz45',         // 'blitz45' | 'blitz30' | 'questions10' | 'zen'
   score: 0,
   streak: 0,
@@ -73,6 +74,8 @@ const saveScoreSection = document.getElementById('save-score-section');
 // Modal Elements
 const modalLeaderboard = document.getElementById('modal-leaderboard');
 const boardTableContainer = document.getElementById('board-table-container');
+const modalHardLang = document.getElementById('modal-hard-lang');
+const btnCloseHardModal = document.getElementById('btn-close-hard-modal');
 
 // Sound & Header Buttons
 const btnSoundToggle = document.getElementById('btn-sound-toggle');
@@ -165,7 +168,11 @@ function startGame(level) {
   } else if (level === 'medium') {
     state.questionDeck = shuffle(mediumSnippets);
   } else {
-    state.questionDeck = shuffle(hardConsoleChallenges);
+    if (state.selectedHardLanguage && state.selectedHardLanguage !== 'ALL') {
+      state.questionDeck = shuffle(hardConsoleChallenges.filter(q => q.language === state.selectedHardLanguage));
+    } else {
+      state.questionDeck = shuffle(hardConsoleChallenges);
+    }
   }
 
   // Setup Mode Timer
@@ -183,7 +190,9 @@ function setupModeHUD() {
   const levelNames = {
     easy: 'FÁCIL: LOGOS',
     medium: 'MEDIO: CÓDIGO',
-    hard: 'DIFÍCIL: CONSOLA'
+    hard: state.selectedHardLanguage && state.selectedHardLanguage !== 'ALL'
+      ? `DIFÍCIL: ${state.selectedHardLanguage.toUpperCase()}`
+      : 'DIFÍCIL: CONSOLA'
   };
 
   hudLevelTag.textContent = levelNames[state.currentLevel];
@@ -272,7 +281,17 @@ function renderNextQuestion() {
 
   if (state.questionIndex >= state.questionDeck.length) {
     // Reshuffle deck if blitz has remaining time
-    state.questionDeck = state.currentLevel === 'easy' ? getProgressiveEasyDeck() : shuffle(state.questionDeck);
+    if (state.currentLevel === 'easy') {
+      state.questionDeck = getProgressiveEasyDeck();
+    } else if (state.currentLevel === 'medium') {
+      state.questionDeck = shuffle(mediumSnippets);
+    } else {
+      if (state.selectedHardLanguage && state.selectedHardLanguage !== 'ALL') {
+        state.questionDeck = shuffle(hardConsoleChallenges.filter(q => q.language === state.selectedHardLanguage));
+      } else {
+        state.questionDeck = shuffle(hardConsoleChallenges);
+      }
+    }
     state.questionIndex = 0;
   }
 
@@ -568,6 +587,7 @@ window.addEventListener('keydown', (e) => {
   // Escape closes modals
   if (key === 'ESCAPE') {
     closeLeaderboard();
+    if (modalHardLang) modalHardLang.style.display = 'none';
   }
 });
 
@@ -675,7 +695,35 @@ function setupEventListeners() {
   // Home Level Buttons
   document.getElementById('card-start-easy').addEventListener('click', () => startGame('easy'));
   document.getElementById('card-start-medium').addEventListener('click', () => startGame('medium'));
-  document.getElementById('card-start-hard').addEventListener('click', () => startGame('hard'));
+  document.getElementById('card-start-hard').addEventListener('click', () => {
+    sound.playSelect();
+    modalHardLang.style.display = 'flex';
+  });
+
+  // Hard Mode Language Picker Choices
+  if (modalHardLang) {
+    const langBtns = modalHardLang.querySelectorAll('.btn-lang-choice');
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.playSelect();
+        state.selectedHardLanguage = btn.dataset.lang;
+        modalHardLang.style.display = 'none';
+        startGame('hard');
+      });
+    });
+
+    if (btnCloseHardModal) {
+      btnCloseHardModal.addEventListener('click', () => {
+        modalHardLang.style.display = 'none';
+      });
+    }
+
+    modalHardLang.addEventListener('click', (e) => {
+      if (e.target === modalHardLang) {
+        modalHardLang.style.display = 'none';
+      }
+    });
+  }
 
   // Home Mode Buttons
   const modeButtons = document.querySelectorAll('#mode-selector .mode-btn');

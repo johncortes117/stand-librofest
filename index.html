@@ -268,6 +268,60 @@
           </div>
         </div>
       </div>
+
+      <!-- HARD MODE LANGUAGE SELECTION MODAL -->
+      <div class="modal-backdrop" id="modal-hard-lang" style="display: none;">
+        <div class="modal-box modal-box-small">
+          <div class="modal-top">
+            <div class="modal-title">🧠 RETO DIFÍCIL: ELIGE EL LENGUAJE</div>
+            <button class="modal-close-btn" id="btn-close-hard-modal">✕</button>
+          </div>
+          <div class="modal-lang-body">
+            <p class="modal-lang-subtitle">¿En qué lenguaje deseas analizar el código en consola?</p>
+            <div class="lang-picker-grid">
+              <button class="btn-lang-choice" data-lang="Python">
+                <img src="/logos/python.svg" alt="Python" class="lang-pick-icon" />
+                <div class="lang-pick-info">
+                  <span class="lang-pick-name">Python</span>
+                  <span class="lang-pick-desc">Slicing, mutables, cierres y dicts</span>
+                </div>
+              </button>
+
+              <button class="btn-lang-choice" data-lang="JavaScript">
+                <img src="/logos/javascript.svg" alt="JavaScript" class="lang-pick-icon" />
+                <div class="lang-pick-info">
+                  <span class="lang-pick-name">JavaScript</span>
+                  <span class="lang-pick-desc">Coerción, arrays, NaN y quirks</span>
+                </div>
+              </button>
+
+              <button class="btn-lang-choice" data-lang="C / C++">
+                <img src="/logos/cpp.svg" alt="C / C++" class="lang-pick-icon" />
+                <div class="lang-pick-info">
+                  <span class="lang-pick-name">C / C++</span>
+                  <span class="lang-pick-desc">Punteros, incremento y operadores</span>
+                </div>
+              </button>
+
+              <button class="btn-lang-choice" data-lang="Java">
+                <img src="/logos/java.svg" alt="Java" class="lang-pick-icon" />
+                <div class="lang-pick-info">
+                  <span class="lang-pick-name">Java</span>
+                  <span class="lang-pick-desc">String Pool, Integer cache y tipos</span>
+                </div>
+              </button>
+
+              <button class="btn-lang-choice full-span" data-lang="ALL">
+                <span class="lang-pick-emoji">🎲</span>
+                <div class="lang-pick-info">
+                  <span class="lang-pick-name">Modo Mix (Todos los Lenguajes)</span>
+                  <span class="lang-pick-desc">Para hackers pro: retos aleatorios de cualquier lenguaje</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
